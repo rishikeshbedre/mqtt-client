@@ -1,0 +1,24 @@
+{
+  "name": "mqtt-client",
+  "version": "1.0.0",
+  "description": "publisher and subscriber example",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node ./client/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rishikeshbedre/mqtt-client.git"
+  },
+  "author": "rishikeshbedre",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rishikeshbedre/mqtt-client/issues"
+  },
+  "homepage": "https://github.com/rishikeshbedre/mqtt-client#readme",
+  "dependencies": {
+    "mqtt": "^3.0.0",
+    "performance-now": "^2.1.0"
+  }
+}
