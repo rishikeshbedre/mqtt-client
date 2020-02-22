@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/rishikeshbedre/mqtt-client#readme",
   "dependencies": {
+    "fs": "0.0.1-security",
     "mqtt": "^3.0.0",
     "performance-now": "^2.1.0"
   }

@@ -1,6 +1,7 @@
 var throughPut = require('./throughput');
 var publisher = require('./publisher');
 var subscriberConsole = require('./subscriber-console');
+var subscriberfile = require('./subscriber-file');
 
 function init(){
     var clientType = process.env.CLIENT_TYPE;
@@ -18,6 +19,9 @@ function init(){
     }
     else if(clientType == "SUBSCRIBER_CONSOLE"){
         subscriberConsole.subscriberClient(host, port, username, password, process.env.SUBSCRIBER_TOPIC, qos);
+    }
+    else if(clientType == "SUBSCRIBER_FILE"){
+        subscriberfile.subscriberWriteFile(host, port, username, password, process.env.SUBSCRIBER_TOPIC, qos);
     }
 }
 

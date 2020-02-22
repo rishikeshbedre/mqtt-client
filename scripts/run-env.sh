@@ -31,3 +31,12 @@ export MQTT_USERNAME=xyz
 export MQTT_PASSWORD=123
 export MQTT_QOS=1
 export SUBSCRIBER_TOPIC="test/#"
+
+#----------------------subscriber file----------------------
+export CLIENT_TYPE=SUBSCRIBER_FILE
+export MQTT_HOST=localhost
+export MQTT_PORT=1883
+export MQTT_USERNAME=xyz
+export MQTT_PASSWORD=123
+export MQTT_QOS=1
+export SUBSCRIBER_TOPIC="test/#"
