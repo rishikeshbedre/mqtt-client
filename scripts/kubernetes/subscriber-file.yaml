@@ -1,0 +1,50 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: "mqtt-client-subscriber"
+spec:
+  selector:
+    matchLabels:
+      app: "subscriber"
+  template:
+    metadata:
+      labels:
+        app: "subscriber"
+    spec:
+      initContainers:
+      - name: "subscriber-init"
+        image: busybox:latest
+        imagePullPolicy: IfNotPresent
+        command: ["chmod","-R","777","/home/app/logs"]
+        volumeMounts:
+        - name: data
+          mountPath: /home/app/logs
+      containers:
+      - name: subscriber-client
+        image: mqtt-client:0.0.1
+        imagePullPolicy: IfNotPresent
+        volumeMounts:
+        - name: data
+          mountPath: /home/app/logs
+        env:
+        - name: CLIENT_TYPE
+          value: "SUBSCRIBER_FILE"
+        - name: MQTT_HOST
+          value: "mosquitto-broker.default.svc.cluster.local"
+        - name: MQTT_PORT
+          value: "1883"
+        - name: MQTT_USERNAME
+          value: "xyz"
+        - name: MQTT_PASSWORD
+          value: "123"
+        - name: MQTT_QOS
+          value: "1"
+        - name: SUBSCRIBER_TOPIC
+          value: "test/#"
+      volumes:
+      - name: data
+        hostPath:
+          path: "/home/rishikesh/mqtt-logs"
+          type: DirectoryOrCreate
+      nodeSelector:
+        kubernetes.io/hostname: "rishikesh"
