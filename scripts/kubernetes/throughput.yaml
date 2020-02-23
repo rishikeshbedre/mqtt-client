@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: "mqtt-client-throughput"
+spec:
+  selector:
+    matchLabels:
+      app: "throughput"
+  template:
+    metadata:
+      labels:
+        app: "throughput"
+    spec:
+      containers:
+      - name: throughput-client
+        image: mqtt-client:0.0.1
+        imagePullPolicy: IfNotPresent
+        env:
+        - name: CLIENT_TYPE
+          value: "THROUGHPUT"
+        - name: MQTT_HOST
+          value: "mosquitto-broker.default.svc.cluster.local"
+        - name: MQTT_PORT
+          value: "1883"
+        - name: MQTT_USERNAME
+          value: "xyz"
+        - name: MQTT_PASSWORD
+          value: "123"
+        - name: MQTT_QOS
+          value: "1"
+        - name: MQTT_MSG
+          value: "Hello"
+        - name: THROUGHPUT_TOPIC
+          value: "test"
+        - name: THROUGHPUT_MAXMSGCOUNT
+          value: "10000"   
+      nodeSelector:
+        kubernetes.io/hostname: "rishikesh"

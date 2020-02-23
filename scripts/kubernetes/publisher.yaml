@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: "mqtt-client-publisher"
+spec:
+  selector:
+    matchLabels:
+      app: "publisher"
+  template:
+    metadata:
+      labels:
+        app: "publisher"
+    spec:
+      containers:
+      - name: publisher-client
+        image: mqtt-client:0.0.1
+        imagePullPolicy: IfNotPresent
+        env:
+        - name: CLIENT_TYPE
+          value: "PUBLISHER"
+        - name: MQTT_HOST
+          value: "mosquitto-broker.default.svc.cluster.local"
+        - name: MQTT_PORT
+          value: "1883"
+        - name: MQTT_USERNAME
+          value: "xyz"
+        - name: MQTT_PASSWORD
+          value: "123"
+        - name: MQTT_QOS
+          value: "1"
+        - name: MQTT_MSG
+          value: '{"demo":"123","user":"xyz"}'
+        - name: PUBLISHER_TOPIC
+          value: "test"
+        - name: PUBLISH_INTERVAL
+          value: "1000"
+        - name: PUBLISH_MSGCOUNT
+          value: "5000"   
+      nodeSelector:
+        kubernetes.io/hostname: "rishikesh"
