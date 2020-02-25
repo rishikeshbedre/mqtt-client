@@ -2,6 +2,7 @@ var throughPut = require('./throughput');
 var publisher = require('./publisher');
 var subscriberConsole = require('./subscriber-console');
 var subscriberfile = require('./subscriber-file');
+var dataloss = require('./dataloss');
 
 function init(){
     var clientType = process.env.CLIENT_TYPE;
@@ -22,6 +23,9 @@ function init(){
     }
     else if(clientType == "SUBSCRIBER_FILE"){
         subscriberfile.subscriberWriteFile(host, port, username, password, process.env.SUBSCRIBER_TOPIC, qos);
+    }
+    else if(clientType == "DATALOSS"){
+        dataloss.datalossClient(host, port, username, password, qos, process.env.DATALOSS_TOPIC, msg, process.env.PUBLISH_MSGCOUNT, process.env.PUBLISH_INTERVAL);
     }
 }
 
