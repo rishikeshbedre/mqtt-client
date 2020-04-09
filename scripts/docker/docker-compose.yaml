@@ -1,0 +1,13 @@
+version: '3.5'
+services:
+  mqtt-client:
+    networks:
+      - mqttbroker
+    image: mqtt-client:0.0.1
+    container_name: mqtt_client_container
+    env_file:
+      - throughput.list
+
+networks:
+  mqttbroker:
+    name: mqttbroker
